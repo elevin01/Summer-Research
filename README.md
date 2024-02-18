@@ -118,8 +118,8 @@ In an era where SNOMED CT stands as an indispensable global standard for encodin
 2. [SNOMED International](https://www.snomed.org)
 3. Agrawal, Ankur, and Kashifuddin Qazi. “Quality Assurance of SNOMED CT Using Lexical Similarity and Sibling Relationships.” ICMHI  2023, Kyoto, Japan, May 12-14, 2023.
 4. A. Agrawal, G. Elhanan, and M. Halper, "Dissimilarities in the Logical Modeling of Apparently Similar Concepts in SNOMED CT," AMIA Annu Symp Proc, vol. 2010, pp. 212-6, Nov 2010.
-5. "word2vec." Google Code. [](https://code.google.com/archive/p/word2vec/) (accessed August 24, 2023).
-6. "SNOMED CT Browser." SNOMED International. [](http://browser.ihtsdotools.org) (accessed August 24, 2023).
+5. "word2vec." Google Code. [https://code.google.com/archive/p/word2vec/](https://code.google.com/archive/p/word2vec/) (accessed August 24, 2023).
+6. "SNOMED CT Browser." SNOMED International. [http://browser.ihtsdotools.org](http://browser.ihtsdotools.org) (accessed August 24, 2023).
 7. L. Cui et al., "Auditing SNOMED CT hierarchical relations based on lexical features of concepts in non-lattice subgraphs," J Biomed Inform, vol. 78, pp. 177-184, Feb 2018.
 8. C. Ochs et al., "A tribal abstraction network for SNOMED CT target hierarchies without attribute relationships," J Am Med Inform Assoc, vol. 22, no. 3, pp. 628-39, May 2015.
 9. A. L. Rector et al., "Getting the foot out of the pelvis: modeling problems affecting use of SNOMED CT hierarchies in practical applications," J Am Med Inform Assoc, vol. 18, no. 4, pp. 432-40, Jul-Aug 2011.
