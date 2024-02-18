@@ -12,6 +12,7 @@
   - [The Similarity Algorithm](#the-similarity-algorithm)
 - [Results](#results)
 - [Discussion](#discussion)
+- [Code](#explanation-of-code)
 - [Conclusion](#conclusion)
 - [References](#references)
 
@@ -106,6 +107,48 @@ Figure 5 illustrates the ratio of terms for which we identified similar terms ve
 The results emphasize the efficiency and reliability of our methodology in pinpointing inconsistencies within SNOMED CT's modeling. The algorithm offers a high probability of correctly identifying potential inconsistencies. 
 
 One salient advantage of our approach is the contextual auditing capability. By contrasting similar concepts, potential discrepancies become discernible, enabling us to identify and rectify them effectively.
+
+## Explanation of Code
+
+This section provides an overview of the main functions used in each file, along with their descriptions and dependencies.
+
+### main.py
+
+1. **get_random_cids(filename, num=50)**
+   - Description: Reads a file containing concept IDs (cids), extracts them, and returns a list of a specified number of randomly selected concept IDs.
+   - Dependencies: None
+
+2. **get_concepts_by_tag(filename, tag, num=100)**
+   - Description: Reads a file containing concepts tagged with specific categories, filters them based on the provided tag, and returns a list of concept IDs.
+   - Dependencies: None
+
+3. **get_all_concepts_by_tag(filename, tag)**
+   - Description: Retrieves all concepts tagged with a specific category, disregarding the limit.
+   - Dependencies: None
+
+4. **tag_equals(term, tag)**
+   - Description: Extracts the tag from a concept term and compares it with the provided tag, returning True if they match, and False otherwise.
+   - Dependencies: None
+
+5. **generate_concept_files(tags, file_directory)**
+   - Description: Generates concept files based on provided tags and a file directory. Processes concepts filtered by tag and writes the results to separate files.
+   - Dependencies: Depends on functions `get_concepts_by_tag` and `get_all_concepts_by_tag`.
+
+6. **validate_file_header(file_path, expected_header)**
+   - Description: Validates the header of a file against an expected header. Raises an exception if the headers do not match.
+   - Dependencies: None
+
+7. **insert_data_from_file(cursor, table_name, file_path, expected_headers)**
+   - Description: Inserts data from a file into a database table, given the cursor, table name, file path, and expected headers.
+   - Dependencies: None
+
+8. **is_table_empty(cursor, table_name)**
+   - Description: Checks if a database table is empty by executing a count query using the cursor.
+   - Dependencies: None
+
+9. **populate_database()**
+   - Description: Populates the database tables with data from specified files. Connects to the database, inserts data into tables, and commits the changes.
+   - Dependencies: Depends on functions `insert_data_from_file` and `is_table_empty`.
 
 
 ## Conclusion
