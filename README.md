@@ -12,7 +12,7 @@
   - [The Similarity Algorithm](#the-similarity-algorithm)
 - [Results](#results)
 - [Discussion](#discussion)
-- [Code](#explanation-of-code)
+- [Explanation of Code](#explanation-of-code)
 - [Conclusion](#conclusion)
 - [References](#references)
 
@@ -26,6 +26,8 @@ To illustrate, consider figure 1 below:
 
 
 ![Figure 1: Illustration of a concept in SNOMED CT](images/fig1.png)
+
+Figure 1: Illustration of a concept in SNOMED CT
 
 The term "Myocardial infarction (disorder)" with its unique identifier 22298006 not only encompasses various descriptions like "Heart attack" but also intertwines with fourteen children concepts, four parent concepts, and intricate attribute relationships such as "Finding site” and “Associated morphology” linked to "Myocardium structure" and “Infarct.” 
 
@@ -45,6 +47,7 @@ The methodology outlined in this study is anchored in the July 2023 version of t
 To elaborate, if we take two terms, say Term A and Term B, and categorize them as lexically similar, they should essentially mirror each other in their attribute composition. Any significant disparity in this attribute mapping indicates potential inconsistencies between the terms, which can have broader implications for the database's accuracy and utility.
 
 ![Figure 2: Overall approach of methodology](images/fig2.png)
+
 Figure 2: Overall approach of methodology
 
 The algorithm itself can be simplified in three main steps:
@@ -63,6 +66,7 @@ The crux of our approach lies in the algorithmic comparison of two SNOMED CT con
 Our corpus, a combination of PubMed and Wikipedia articles, feeds into this network. This rich corpus ensures that the generated vocabulary aligns well with SNOMED CT terminology and offers an accurate representation of inter-word relationships.
 
 ![Figure 3: Overall approach of similarity calculation algorithm](images/fig3.png)
+
 Figure 3: Overall approach of similarity calculation algorithm
 
 Consider two concepts for comparison: Concept X and Concept Y (with the word count in X >= Y). After an initial preprocessing step where both concepts are converted to lowercase and devoid of their tags, each concept is broken down into individual words:
@@ -88,6 +92,7 @@ From the SNOMED CT database, we selected a random set of 50 terms from three dis
 
 
 ![Figure 4: Comparison of input terms to sets of similar terms found](images/fig4.png)
+
 Figure 4: Comparison of input terms to sets of similar terms found
 
 
@@ -96,6 +101,7 @@ Upon further assessment of these 70 sets for modeling inconsistencies, our appro
 
 
 ![Figure 5: Results of auditing](images/fig5.png)
+
 Figure 5: Results of auditing
 
 
@@ -110,7 +116,7 @@ One salient advantage of our approach is the contextual auditing capability. By 
 
 ## Explanation of Code
 
-This section provides an overview of the main functions used in each file, along with their descriptions and dependencies.
+This section provides an overview of the main functions used in each file, along with their descriptions and dependencies. Please refer to the actual code file for a better and in-depth understanding of the code. 
 
 ### main.py
 
@@ -288,6 +294,67 @@ This section provides an overview of the main functions used in each file, along
     - Description: Checks if the number of attributes in the similar term matches that of the original term and if the result is valid.
     - Dependencies: None.
 
+### databse.py
+
+1. **get_term_by_concept_id(concept_id)**
+   - Description: Retrieves the term corresponding to a given concept ID from the database.
+   - Dependencies: Requires the `pymysql` library for database connection.
+
+2. **get_concept_id(term)**
+   - Description: Retrieves the concept ID corresponding to a given term from the database.
+   - Dependencies: Requires the `pymysql` library for database connection.
+
+3. **get_attribute_count(term)**
+   - Description: Retrieves the count of attributes associated with a given term.
+   - Dependencies: Depends on the `get_concept_id()` function and the `pymysql` library for database connection.
+
+4. **print_fully_specified_name(concept_id)**
+   - Description: Prints the fully specified name of a concept given its concept ID.
+   - Dependencies: Requires the `pymysql` library for database connection.
+
+5. **get_fully_specified_name(concept_id)**
+   - Description: Retrieves the fully specified name of a concept given its concept ID.
+   - Dependencies: Requires the `pymysql` library for database connection.
+
+6. **get_parents(concept_id)**
+   - Description: Retrieves the parent concepts of a given concept ID.
+   - Dependencies: Requires the `pymysql` library for database connection.
+
+7. **print_parents(input_data)**
+   - Description: Prints the parent concepts of a given concept ID or list of parent terms.
+   - Dependencies: Requires the `get_parents()` function and the `pymysql` library for database connection.
+
+8. **print_all_relationships(concept_id)**
+   - Description: Prints all relationships of a given concept ID.
+   - Dependencies: Requires the `pymysql` library for database connection.
+
+9. **get_term_for_concept_id(concept_id)**
+   - Description: Retrieves the term corresponding to a given concept ID from the database.
+   - Dependencies: Requires the `pymysql` library for database connection.
+
+10. **get_groups_with_attributes(concept_id)**
+    - Description: Retrieves groups of attributes associated with a given concept ID.
+    - Dependencies: Requires the `pymysql` library for database connection.
+
+11. **print_groups(groups)**
+    - Description: Prints groups of attributes associated with a concept.
+    - Dependencies: None.
+
+12. **find_similar_terms_v2(term)**
+    - Description: Finds similar terms to a given term based on word and tag similarity.
+    - Dependencies: Requires the `pymysql` library for database connection and functions from the `similarity` module.
+
+13. **find_terms_with_tag(tag)**
+    - Description: Finds terms with a given tag.
+    - Dependencies: Requires the `pymysql` library for database connection.
+
+14. **find_random_terms_with_tag(tag, n)**
+    - Description: Finds a random sample of terms with a given tag.
+    - Dependencies: Requires the `pymysql` library for database connection and the `random` module.
+
+15. **tag_equals(concept_parts, tag)**
+    - Description: Checks if the tag of a concept matches a given tag.
+    - Dependencies: Requires functions from the `similarity` module.
 
 ## Conclusion
 
