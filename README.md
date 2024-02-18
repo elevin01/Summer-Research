@@ -24,7 +24,7 @@ Boasting more than 350,000 active concepts organized meticulously across ninetee
 To illustrate, consider figure 1 below: 
 
 
-Figure 1: Illustration of a concept in SNOMED CT
+![Figure 1: Illustration of a concept in SNOMED CT](images/fig1.png)
 
 The term "Myocardial infarction (disorder)" with its unique identifier 22298006 not only encompasses various descriptions like "Heart attack" but also intertwines with fourteen children concepts, four parent concepts, and intricate attribute relationships such as "Finding site” and “Associated morphology” linked to "Myocardium structure" and “Infarct.” 
 
