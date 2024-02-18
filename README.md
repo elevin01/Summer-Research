@@ -150,6 +150,144 @@ This section provides an overview of the main functions used in each file, along
    - Description: Populates the database tables with data from specified files. Connects to the database, inserts data into tables, and commits the changes.
    - Dependencies: Depends on functions `insert_data_from_file` and `is_table_empty`.
 
+### modeltrain.py
+
+1. **modeltrain()**
+   - Description: Trains a Word2Vec model using the provided input file containing text data. The trained model is then saved to the specified output file.
+   - Dependencies: This function relies on the `gensim` library, particularly the `Word2Vec` class from `gensim.models`. It also uses the `re` module for regular expressions.
+
+### similarity.py
+
+1. **calculate_similarity2(model, vectors1, vectors2)**
+   - Description: Calculates the similarity score between two sets of word vectors using cosine similarity.
+   - Dependencies: This function uses the `numpy` library for array operations and the `scipy.spatial.distance` module for cosine similarity calculation.
+
+2. **calculate_similarity(model, vectors1, vectors2)**
+   - Description: Calculates the similarity score between two sets of word vectors by computing the cosine similarity between their mean vectors.
+   - Dependencies: This function relies on the `numpy` library for array operations and the `scipy.spatial.distance` module for cosine similarity calculation.
+
+3. **display_closestwords_tsnescatterplot(model, word)**
+   - Description: Displays a t-SNE scatter plot for the closest words to the given word based on the Word2Vec model.
+   - Dependencies: This function requires the `numpy`, `matplotlib.pyplot`, and `sklearn.manifold.TSNE` modules, along with the `gensim.models.Word2Vec` class.
+
+4. **similarity()**
+   - Description: Computes the similarity scores between two medical terms using word embeddings from a pre-trained Word2Vec model.
+   - Dependencies: This function relies on the `gensim.models.KeyedVectors.load` method to load the Word2Vec model, as well as the `numpy` library for array operations.
+
+5. **avg_of_max_similarity(vectors1, vectors2, model)**
+   - Description: Calculates the average of the maximum similarity scores between each word vector of one term and all other word vectors of the other term.
+   - Dependencies: This function utilizes the `numpy` library for array operations and the `scipy.spatial.distance.cosine` function for cosine similarity calculation.
+
+6. **calculate_bidirectional_similarity(model, vectors1, vectors2)**
+   - Description: Calculates the bidirectional similarity score between two sets of word vectors by considering the maximum similarity scores in both directions.
+   - Dependencies: This function relies on the `numpy` library for array operations and the `scipy.spatial.distance.cosine` function for cosine similarity calculation.
+
+7. **calculate_similarity3(vectors1, vectors2)**
+   - Description: Calculates the similarity score between two sets of word vectors by finding unique vectors and then computing the cosine similarity.
+   - Dependencies: This function depends on the `numpy` library for array operations and the `scipy.spatial.distance.cosine` function for cosine similarity calculation.
+
+8. **contains_antonyms(words1, words2)**
+   - Description: Checks if the given sets of words contain any antonym pairs.
+   - Dependencies: This function does not have any external dependencies.
+
+9. **split_term(term)**
+   - Description: Splits a medical term into its constituent words and tag (if present).
+   - Dependencies: This function relies on the `re` module for regular expression operations.
+
+10. **compute_all_similarity_scores(term, similar_term, model)**
+    - Description: Computes various similarity scores between two medical terms using word embeddings from a pre-trained Word2Vec model.
+    - Dependencies: This function depends on the previously described `avg_of_max_similarity`, `calculate_bidirectional_similarity`, `calculate_similarity`, and `calculate_similarity3` functions, along with the `numpy` library for array operations.
+
+11. **get_vectors(term, model)**
+    - Description: Retrieves word vectors for the words in the given term using a pre-trained Word2Vec model.
+    - Dependencies: This function depends on the `numpy` library for array operations and the `gensim.models.KeyedVectors` class for accessing word embeddings.
+
+12. **combine_relationships(parents, groups)**
+    - Description: Combines parent and group relationships into a single list.
+    - Dependencies: This function does not have any external dependencies.
+
+13. **check_common_parents(parents_1, parents_2, term1, term2)**
+    - Description: Checks for common parents between two terms.
+    - Dependencies: This function does not have any external dependencies.
+
+14. **check_common_groups(groups_1, groups_2, term1, term2)**
+    - Description: Checks for common groups and attributes between two terms.
+    - Dependencies: This function does not have any external dependencies.
+
+15. **audit_terms(max_score, words1, words2, parents_1, parents_2, groups_1, groups_2, term1, term2)**
+    - Description: Performs an audit of the similarity between two terms and provides justification.
+    - Dependencies: This function relies on the previously described `contains_antonyms`, `check_common_parents`, and `check_common_groups` functions.
+
+16. **get_term(input)**
+    - Description: Retrieves a term from the database based on user input (concept ID or term itself).
+    - Dependencies: This function relies on the `databse` module for interacting with the database.
+
+### findwords.py
+
+1. **get_term_details(concept_id, term)**
+   - Description: Retrieves the parents and attributes included in each group of a term from a database.
+   - Dependencies: Relies on functions from the `databse` module to retrieve information from the database.
+
+2. **audit_terms2(concept_id_term1, concept_id_similar_term, term1_details, similar_term_details, term1, similar_term, similarity_score)**
+   - Description: Audits the details of two terms and computes a result based on their similarities.
+   - Dependencies: Requires functions from the `similarity` module to calculate similarity scores and compare word vectors.
+
+3. **process_selected_terms(terms, n=50)**
+   - Description: Processes a list of terms, finding similar terms for each and writing the results to a file.
+   - Dependencies: Utilizes functions from the `databse`, `similarity`, and `filter_terms` modules for database operations, similarity calculations, and term filtering, respectively.
+
+4. **process_core(cids, tcon, filepath)**
+   - Description: Processes a list of concept IDs, finding similar terms for each and writing the results to a file.
+   - Dependencies: Relies on functions from the `databse`, `similarity`, and `filter_terms_beta` modules for database operations, similarity calculations, and term filtering, respectively.
+
+5. **process_selected_integers()**
+   - Description: Processes a list of integers corresponding to concept IDs, finding similar terms for each and writing the results to a file.
+   - Dependencies: Depends on functions from the `databse`, `similarity`, and `filter_terms_by_constraints` modules for database operations, similarity calculations, and term filtering, respectively.
+
+6. **filter_terms(term, similar_terms, model)**
+   - Description: Filters similar terms based on their cosine similarity score with the input term.
+   - Dependencies: Requires functions from the `similarity` module to calculate similarity scores and compare word vectors.
+
+7. **filter_terms_beta(term, similar_terms, model)**
+   - Description: Another version of the function to filter similar terms based on their cosine similarity score with the input term.
+   - Dependencies: Also requires functions from the `similarity` module to calculate similarity scores and compare word vectors.
+
+8. **get_majority_details(filtered_details, threshold_ratio=0.5)**
+   - Description: Determines the majority attributes and groups among a list of filtered term details.
+   - Dependencies: None.
+
+9. **audit_majority_details(concept_id_term, original_term_details, majority_details, term)**
+   - Description: Audits the majority details of a term and computes a result based on their similarities.
+   - Dependencies: None.
+
+10. **filter_terms_by_constraints(term, filtered_similar_terms)**
+    - Description: Filters similar terms based on constraints such as word length and tag.
+    - Dependencies: None.
+
+11. **adjust_target_values(term, missing_attributes)**
+    - Description: Adjusts the target values of missing attributes based on the unique words in the term.
+    - Dependencies: None.
+
+12. **check_common_attributes(term1_details, similar_term_details)**
+    - Description: Checks for common attributes between two terms.
+    - Dependencies: None.
+
+13. **common_parents_count(term_details_1, term_details_2)**
+    - Description: Counts the number of common parents between two sets of term details.
+    - Dependencies: None.
+
+14. **check_common_attributes_v3(term1_details, term2_details)**
+    - Description: Checks for common attributes between two terms, considering the attributes' names and counts.
+    - Dependencies: None.
+
+15. **process_selected_integersv2()**
+    - Description: Processes a list of integers corresponding to concept IDs, finding similar terms for each and writing the results to a file, with additional similarity score computations.
+    - Dependencies: Depends on functions from the `databse`, `similarity`, and `filter_terms_by_constraints` modules for database operations, similarity calculations, and term filtering, respectively.
+
+16. **check_attribute_count(term_details, similar_term_details, result)**
+    - Description: Checks if the number of attributes in the similar term matches that of the original term and if the result is valid.
+    - Dependencies: None.
+
 
 ## Conclusion
 
